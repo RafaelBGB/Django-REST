@@ -1,0 +1,26 @@
+[
+  {
+    "username": "user1",
+    "first_name": "Иван",
+    "last_name": "Иванович",
+    "email": "user1@mail.local",
+    "birthday_year": "1974",
+    "password": "1234"
+  },
+  {
+    "username": "user2",
+    "first_name": "Иван",
+    "last_name": "Карлович",
+    "email": "user2@mail.local",
+    "birthday_year": "1992",
+    "password": "1234"
+  },
+  {
+    "username": "user3",
+    "first_name": "Иван",
+    "last_name": "Василивич",
+    "email": "user3@mail.local",
+    "birthday_year": "1530",
+    "password": "1234"
+  }
+]
