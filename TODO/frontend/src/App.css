@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -35,4 +35,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.menu {
+	list-style-type: none;
+	margin-top: 28px;
+	float: right;
+}
+.menu li {
+	float: left;
+}
+.menu a {
+	color: #8c8c8c;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: right;
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 10px 13px;
+}
+
+.logo {
+    background-image: url("https://img.icons8.com/ios/50/000000/checklist--v1.png");
+    margin-top: 10px;
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+
+.header {
+    margin-bottom: 20px;
+    background-color: #e0e0e0;
 }
