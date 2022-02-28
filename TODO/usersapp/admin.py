@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from usersapp.models import User
+
+
+# Зарегистируем таблицы которые будет видны в админке.
+admin.site.register(User)
