@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+
 from usersapp.views import UsersModelViewSet
+from todoapp.views import ToDoModelViewSet, ProjectModelViewSet
 
 router = DefaultRouter()
 router.register('users', UsersModelViewSet)
+router.register('ToDo', ToDoModelViewSet)
+router.register('Projects', ProjectModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
