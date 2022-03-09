@@ -15,6 +15,9 @@ class Project(models.Model):
                                   blank=True)
     users = models.ManyToManyField(User, verbose_name='Участиники проекта')
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 # Поле status сделаем максимальной длиной = 3, так как в дальнейшем возможно
 # статусов будет больше.
@@ -53,3 +56,7 @@ class ToDo(models.Model):
         choices=STATUS_CHOICES,
         default=ACTIVE
     )
+
+    def delete(self, using=None, keep_parents=False):
+        self.status = self.CLOSE
+        self.save()

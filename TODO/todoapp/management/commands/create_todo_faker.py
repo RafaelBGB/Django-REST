@@ -1,9 +1,7 @@
-import datetime
 from random import randint
 
 from django.core.management.base import BaseCommand
 import factory
-from factory import fuzzy
 
 from usersapp.models import User
 from todoapp.models import Project, ToDo
@@ -36,9 +34,7 @@ class ToDoFabric(factory.django.DjangoModelFactory):
         model = ToDo
 
     project = factory.SubFactory(ProjectFabric)
-    author = User.objects.exclude(username='django').order_by('?').first()
     text = factory.Faker('sentence', nb_words=20)
-    status = fuzzy.FuzzyChoice(ToDo.STATUS_CHOICES)
 
 
 class Command(BaseCommand):
@@ -49,11 +45,16 @@ class Command(BaseCommand):
         for i in range(5):
             # Вытащим из базы всех пользователей кроме администратора "django",
             # отсортируем случайным образом (метод order_by('?')
-            # сильно нагружает базу) и получим от 1 до 3 первых пользователй
-            user_list = User.objects.exclude(username='django').order_by('?')[:randint(1, 5)]
+            # сильно нагружает базу) и получим от 1 до 5 первых пользователй
+            user_list = User.objects.exclude(username='django').order_by('?')[
+                        :randint(1, 5)]
             ProjectFabric(users=user_list)
 
         project_list = Project.objects.all()
 
         for project in project_list:
-            ToDoFabric.create_batch(5, project=project)
+            _ = randint(3, 10)
+            for i in range(_):
+                author = User.objects.exclude(username='django').order_by(
+                    '?').first()
+                ToDoFabric(project=project, author=author)
