@@ -31,6 +31,10 @@ class ToDo(models.Model):
     )
 
     uid = models.UUIDField(primary_key=True, default=uuid4)
+    name_todo = models.CharField(
+        verbose_name='Назавание заметки',
+        max_length=150,
+    )
     project = models.ForeignKey(
         Project,
         verbose_name='Название проекта',

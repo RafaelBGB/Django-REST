@@ -23,30 +23,41 @@ const UserItem = ({user}) => {
     )
 }
 
-const UserList = ({users}) => {
+const UserList = ({items}) => {
+    if (items.results) {
+        return (
+            <div>
+                <table className={"table table-striped"}>
+                    <thead>
+                    <tr>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            First name
+                        </th>
+                        <th>
+                            Last name
+                        </th>
+                        <th>
+                            Birthday year
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {items.results.map((user) => <UserItem user={user}/>)}
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
     return (
-        <table className={"table table-striped"}>
-            <thead>
-                <th>
-                    Username
-                </th>
-                <th>
-                    First name
-                </th>
-                <th>
-                    Last name
-                </th>
-                <th>
-                    Birthday year
-                </th>
-                <th>
-                    Email
-                </th>
-            </thead>
-            <tbody>
-                {users.map((user) => <UserItem user={user} />)}
-            </tbody>
-        </table>
+        <div>
+
+        </div>
     )
 }
 
