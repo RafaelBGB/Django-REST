@@ -1,19 +1,28 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 
 const Menu = () => {
     return (
         <div className={"header clearfix"}>
-            <a href={"#"} className={"logo"}></a>
-            <ul className={"menu"}>
+            <Link to="/">
+                <img className={"logo"}
+                     src={"https://img.icons8.com/ios/50/000000/checklist--v1.png"}
+                     alt={"логотип"}
+                />
+            </Link>
+            <ul className="menu">
                 <li>
-                    <a href={"#"}>домой</a>
+                    <Link to="/">пользователи</Link>
                 </li>
                 <li>
-                    <a href={"#"}>пользователи</a>
+                    <Link to="/projects/">проекты</Link>
                 </li>
                 <li>
-                    <a href={"#"}>войти</a>
+                    <Link to="/todo/">заметки</Link>
+                </li>
+                <li>
+                    <Link to="#" >войти</Link>
                 </li>
             </ul>
         </div>

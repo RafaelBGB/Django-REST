@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <footer className={'panel-footer bg-light'}>
-            <div className="blockquote-footer text-center py-3">
+        <footer className="text-center bg-light" >
+            <div className="text-center p-4">
                 © 2022 Copyright:
                 <a href={"https://mdbootstrap.com"}> MDBootstrap.com</a>
             </div>

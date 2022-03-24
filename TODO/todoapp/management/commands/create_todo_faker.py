@@ -33,6 +33,7 @@ class ToDoFabric(factory.django.DjangoModelFactory):
     class Meta:
         model = ToDo
 
+    name_todo = factory.Sequence(lambda n: 'todo_name_%s' % (n + 1))
     project = factory.SubFactory(ProjectFabric)
     text = factory.Faker('sentence', nb_words=20)
 
