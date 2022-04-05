@@ -1,5 +1,5 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, \
-    StringRelatedField, ChoiceField
+    StringRelatedField, ChoiceField, ModelSerializer
 
 from todoapp.models import ToDo, Project
 
@@ -12,10 +12,16 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class ToDoModelSerializer(HyperlinkedModelSerializer):
+class ToDoModelSerializer(ModelSerializer):
     author = StringRelatedField()
     status = ChoiceField(ToDo.STATUS_CHOICES)
 
+    class Meta:
+        model = ToDo
+        fields = '__all__'
+
+
+class ToDoModelSerializerBase(ModelSerializer):
     class Meta:
         model = ToDo
         fields = '__all__'

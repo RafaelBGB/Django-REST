@@ -1,0 +1,18 @@
+Name                                                                 Stmts   Miss  Cover
+----------------------------------------------------------------------------------------
+TODO\__init__.py                                                         0      0   100%
+TODO\asgi.py                                                             4      4     0%
+TODO\settings.py                                                        20      0   100%
+todoapp\tests.py                                                        86      0   100%
+todoapp\views.py                                                        32      0   100%
+usersapp\__init__.py                                                     0      0   100%
+usersapp\admin.py                                                        4      0   100%
+usersapp\apps.py                                                         4      0   100%
+usersapp\migrations\0001_initial.py                                      9      0   100%
+usersapp\migrations\__init__.py                                          0      0   100%
+usersapp\models.py                                                       7      0   100%
+usersapp\serializers.py                                                  7      0   100%
+usersapp\tests.py                                                        1      0   100%
+usersapp\views.py                                                        7      0   100%
+----------------------------------------------------------------------------------------
+TOTAL                                                                  273     13    95%
