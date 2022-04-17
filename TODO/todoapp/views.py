@@ -4,7 +4,7 @@ from django_filters import rest_framework as filters
 
 from todoapp.models import ToDo, Project
 from todoapp.serializers import ToDoModelSerializer, ProjectModelSerializer, \
-    ToDoModelSerializerBase
+    ToDoModelSerializerBase, ProjectModelSerializerBase
 
 
 class ProjectLimitPagination(LimitOffsetPagination):
@@ -45,7 +45,12 @@ class ToDoModelViewSet(ModelViewSet):
 
 class ProjectModelViewSet(ModelViewSet):
     queryset = Project.objects.all()
-    serializer_class = ProjectModelSerializer
+    # serializer_class = ProjectModelSerializer
     pagination_class = ProjectLimitPagination
     filterset_class = ProjectFilter
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return ProjectModelSerializer
+        return ProjectModelSerializerBase
 

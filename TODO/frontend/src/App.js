@@ -12,6 +12,8 @@ import ToDoList from "./components/ToDo";
 import ProjectInfo from "./components/ProjectInfo";
 import LoginForm from "./components/Auth";
 import Cookies from "universal-cookie/es6";
+import ProjectForm from "./components/ProjectForm";
+import ToDoForm from "./components/ToDoForm";
 
 
 const NotFound404 = () => {
@@ -76,8 +78,6 @@ class App extends React.Component {
             this.setState({'username': username})
             this.set_token(this.state.token)
         }).catch(error => alert('Неверный логин или пароль'))
-
-
     }
 
     get_headers() {
@@ -86,6 +86,61 @@ class App extends React.Component {
             headers['Authorization'] = this.state.token
         }
         return headers
+    }
+
+    createProject(name, users, url_on_repo) {
+        const headers = this.get_headers()
+        const data = {name: name, users: users, url_on_repo: url_on_repo}
+        axios.post(`http://127.0.0.1:8000/api/projects/`, data, {headers})
+            .then(response => {
+                let new_projects = this.state.projects
+                new_projects.results = [...this.state.projects.results, response.data]
+                new_projects.count += 1
+                this.setState(
+                    {
+                        project: new_projects
+                    }
+                )
+            }).catch(error => console.log(error))
+    }
+
+    deleteProject(uid) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/projects/${uid}/`, {headers})
+            .then(response => {
+                let new_projects = this.state.projects
+                new_projects.results = this.state.projects.results
+                    .filter((item) => item.uid != uid)
+                new_projects.count -= 1
+                this.setState({'projects': new_projects})
+            }).catch(error => console.log(error))
+    }
+
+    createTodo(name_todo, project, author, text) {
+        const headers = this.get_headers()
+        const data = {name_todo: name_todo, project: project,
+            author: author, text: text}
+        axios.post(`http://127.0.0.1:8000/api/todo/`, data, {headers})
+            .then(response => {
+                let new_todo = this.state.todo
+                new_todo.results = [...this.state.todo.results, response.data]
+                new_todo.count += 1
+                this.setState(
+                    {
+                        todo: new_todo
+                    }
+                )
+            }).catch(error => console.log(error))
+    }
+
+    deleteTodo(uid) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/todo/${uid}/`, {headers})
+            .then(response => {
+                let new_todo = this.state.todo
+                new_todo.results.filter((item) => item.uid == uid)[0].status = 'C'
+                this.setState({'todo': new_todo})
+            }).catch(error => console.log(error))
     }
 
     load_data() {
@@ -144,11 +199,32 @@ class App extends React.Component {
                                 <UserList items={this.state.users}/>}
                             />
                             <Route exact path="/projects" component={() =>
-                                <ProjectList items={this.state.projects}/>}
+                                <ProjectList
+                                    items={this.state.projects}
+                                    deleteProject={(uid) => this.deleteProject(uid)}
+                                />}
                             />
+                            <Route exact path="/projects/create" component={() =>
+                                <ProjectForm
+                                    users={this.state.users.results}
+                                    createProject={(name, url_on_repo, users) =>
+                                        this.createProject(name, url_on_repo, users)}
+                                />
+                            }/>
                             <Route exact path="/todo" component={() =>
-                                <ToDoList items={this.state.todo}/>}
+                                <ToDoList
+                                    items={this.state.todo}
+                                    deleteTodo={(uid) => this.deleteTodo(uid)}
+                                />}
                             />
+                            <Route exact path="/todo/create" component={() =>
+                                <ToDoForm
+                                    author={this.state.users.results}
+                                    project={this.state.projects.results}
+                                    createTodo={(name_todo, project, author, text) =>
+                                        this.createTodo(name_todo, project, author, text)}
+                                />
+                            }/>
                             <Route exact path="/project/:uid" component={() =>
                                 <ProjectInfo items={this.state.projects}
                                              todo={this.state.todo}/>}
