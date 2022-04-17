@@ -31,16 +31,16 @@ const UserList = ({items}) => {
                     <thead>
                     <tr>
                         <th>
-                            Username
+                            Логин
                         </th>
                         <th>
-                            First name
+                            Имя
                         </th>
                         <th>
-                            Last name
+                            Фамилия
                         </th>
                         <th>
-                            Birthday year
+                            Год рождения
                         </th>
                         <th>
                             Email
